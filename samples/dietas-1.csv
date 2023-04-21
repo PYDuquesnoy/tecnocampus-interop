@@ -1,0 +1,4 @@
+IDPaciente,Nombre,Apellido1,Apellido2,Habitacion,FechaEntrada,Dieta,Acompañante
+1001,Joan,Cruz,Casanovas,201,20/04/2023,Dieta Blanda,
+1009,Silvia,Hernandez,Vila,309,18/04/2023,Dieta Basal,Dieta Basal
+1011,David,Abramov,,623,15/04/2023,Dieta liquida Kosher,
