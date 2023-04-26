@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://MiCocina.es" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://MiCocina.es">
+    <types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://MiCocina.es">
+            <s:element name="GetMenuForPatient">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" name="IDPaciente" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetMenuForPatientResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element name="GetMenuForPatientResult" type="s0:Record"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="Record">
+                <s:sequence>
+                    <s:element minOccurs="0" name="IDPaciente" type="s:long"/>
+                    <s:element minOccurs="0" name="NombreCompleto">
+                        <s:simpleType>
+                            <s:restriction base="s:string">
+                                <s:maxLength value="100"/>
+                            </s:restriction>
+                        </s:simpleType>
+                    </s:element>
+                    <s:element minOccurs="0" name="Habitacion" type="s:long"/>
+                    <s:element minOccurs="0" name="FechaEntrada" type="s:string"/>
+                    <s:element minOccurs="0" name="Dieta" type="s:string"/>
+                    <s:element minOccurs="0" name="Acompañante" type="s:boolean"/>
+                    <s:element minOccurs="0" name="DietaAcompañante" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+        </s:schema>
+    </types>
+    <message name="GetMenuForPatientSoapIn">
+        <part name="parameters" element="s0:GetMenuForPatient"/>
+    </message>
+    <message name="GetMenuForPatientSoapOut">
+        <part name="parameters" element="s0:GetMenuForPatientResponse"/>
+    </message>
+    <portType name="DietasSoap">
+        <operation name="GetMenuForPatient">
+            <input message="s0:GetMenuForPatientSoapIn"/>
+            <output message="s0:GetMenuForPatientSoapOut"/>
+        </operation>
+    </portType>
+    <binding name="DietasSoap" type="s0:DietasSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="GetMenuForPatient">
+            <soap:operation soapAction="http://MiCocina.es/Hospital.WS.Dietas.GetMenuForPatient" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="Dietas">
+        <port name="DietasSoap" binding="s0:DietasSoap">
+            <soap:address location="http://localhost:52773/csp/healthshare/solucion/Hospital.WS.Dietas.cls"/>
+        </port>
+    </service>
+</definitions>
