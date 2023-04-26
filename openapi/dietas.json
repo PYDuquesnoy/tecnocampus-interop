@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Dietas de Pacientes",
+    "version": "1.0.0",
+    "title": "Dietas y Menus de Pacientes ingresados",
+    "contact": {
+      "email": "Pierre-Yves.Duquesnoy@intersystems.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/dietas/{IDPaciente}": {
+      "get": {
+        "summary": "Obtiene Dieta de Paciente",
+        "description": "Obtiene la Dieta de un paciente ingresado",
+        "operationId": "leerDieta",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "IDPaciente",
+            "in": "path",
+            "description": "El Identificador de paciente",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "la dieta",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/RMCocinaRecord"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RMCocinaRecord": {
+      "type": "object",
+      "required": [
+        "Dieta",
+        "Habitacion",
+        "IDPaciente",
+        "NombreCompleto"
+      ],
+      "properties": {
+        "IDPaciente": {
+          "type": "integer",
+          "example": 1009
+        },
+        "NombreCompleto": {
+          "type": "string",
+          "example": "Ana Victoria García Obregón"
+        },
+        "Habitacion": {
+          "type": "string",
+          "example": "1204"
+        },
+        "FechaEntrada": {
+          "type": "string",
+          "example": "2023-04-21"
+        },
+        "Dieta": {
+          "type": "string",
+          "example": "Dieta basal sin lactosa"
+        },
+        "Acompanante": {
+          "type": "boolean",
+          "example": true
+        },
+        "DietaAcompanante": {
+          "type": "string",
+          "example": "Dieta basal"
+        }
+      }
+    }
+  }
+}
